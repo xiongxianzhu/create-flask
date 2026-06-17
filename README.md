@@ -5,23 +5,23 @@
 </p>
 
 <p align="center">
-  <a href="https://www.python.org/downloads/"><img src="https://img.shields.io/badge/Python-3.13-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python 3.13"/></a>
-  <a href="https://github.com/astral-sh/uv"><img src="https://img.shields.io/badge/uv-managed-DE5FE9?style=flat-square&logo=uv&logoColor=white" alt="uv"/></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-2EA043?style=flat-square" alt="MIT License"/></a>
+  <a href="https://www.python.org/downloads/"><img src="https://img.shields.io/badge/Python-3.13-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python 3.13"/></a>
+  <a href="https://github.com/astral-sh/uv"><img src="https://img.shields.io/badge/uv-managed-DE5FE9?style=for-the-badge&logo=uv&logoColor=white" alt="uv"/></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-2EA043?style=for-the-badge" alt="MIT License"/></a>
 </p>
 
 <p align="center">
-  <a href="https://flask.palletsprojects.com/"><img src="https://img.shields.io/badge/Flask-pure-000000?style=flat-square&logo=flask&logoColor=white" alt="Flask"/></a>
-  <a href="https://www.sqlalchemy.org/"><img src="https://img.shields.io/badge/SQLAlchemy-2.0-D71F00?style=flat-square&logo=sqlalchemy&logoColor=white" alt="SQLAlchemy 2.0"/></a>
-  <a href="https://docs.pydantic.dev/"><img src="https://img.shields.io/badge/Pydantic-2-E92063?style=flat-square&logo=pydantic&logoColor=white" alt="Pydantic 2"/></a>
-  <a href="https://docs.gunicorn.org/"><img src="https://img.shields.io/badge/gunicorn-WSGI-499848?style=flat-square" alt="gunicorn"/></a>
+  <a href="https://flask.palletsprojects.com/"><img src="https://img.shields.io/badge/Flask-pure-000000?style=for-the-badge&logo=flask&logoColor=white" alt="Flask"/></a>
+  <a href="https://www.sqlalchemy.org/"><img src="https://img.shields.io/badge/SQLAlchemy-2.0-D71F00?style=for-the-badge&logo=sqlalchemy&logoColor=white" alt="SQLAlchemy 2.0"/></a>
+  <a href="https://docs.pydantic.dev/"><img src="https://img.shields.io/badge/Pydantic-2-E92063?style=for-the-badge&logo=pydantic&logoColor=white" alt="Pydantic 2"/></a>
+  <a href="https://docs.gunicorn.org/"><img src="https://img.shields.io/badge/gunicorn-WSGI-499848?style=for-the-badge" alt="gunicorn"/></a>
 </p>
 
 <p align="center">
-  <a href="https://docs.astral.sh/ruff/"><img src="https://img.shields.io/badge/Ruff-lint%20%2B%20format-D7FF64?style=flat-square&logo=ruff&logoColor=000000" alt="Ruff"/></a>
-  <a href="https://mypy-lang.org/"><img src="https://img.shields.io/badge/mypy-typed-2B5B84?style=flat-square&logo=mypy&logoColor=white" alt="mypy"/></a>
-  <a href="https://typer.tiangolo.com/"><img src="https://img.shields.io/badge/CLI-Typer-009485?style=flat-square&logo=typer&logoColor=white" alt="Typer"/></a>
-  <img src="https://img.shields.io/badge/no_REST_framework-✓-4A4A4A?style=flat-square&logo=flask&logoColor=white" alt="No Flask-RESTful / Smorest / Marshmallow"/>
+  <a href="https://docs.astral.sh/ruff/"><img src="https://img.shields.io/badge/Ruff-lint%20%2B%20format-D7FF64?style=for-the-badge&logo=ruff&logoColor=000000" alt="Ruff"/></a>
+  <a href="https://mypy-lang.org/"><img src="https://img.shields.io/badge/mypy-typed-2B5B84?style=for-the-badge&logo=mypy&logoColor=white" alt="mypy"/></a>
+  <a href="https://typer.tiangolo.com/"><img src="https://img.shields.io/badge/CLI-Typer-009485?style=for-the-badge&logo=typer&logoColor=white" alt="Typer"/></a>
+  <img src="https://img.shields.io/badge/no_REST_framework-✓-4A4A4A?style=for-the-badge&logo=flask&logoColor=white" alt="No Flask-RESTful / Smorest / Marshmallow"/>
 </p>
 
 ---
