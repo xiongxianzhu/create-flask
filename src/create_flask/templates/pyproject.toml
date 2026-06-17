@@ -1,0 +1,41 @@
+[project]
+name = "{{ project_name }}"
+version = "0.1.0"
+description = "Flask 项目（由 create-flask 生成）。"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "flask>=3.1",
+    "flask-sqlalchemy>=3.1",
+    "flask-migrate>=4.0",
+    "sqlalchemy>=2.0",
+    "pydantic>=2.0",
+    "pydantic-settings>=2.0",
+    "python-dotenv>=1.0",
+    "gunicorn>=23.0",
+{% if use_redis %}    "redis>=5.0",
+{% endif %}{% if use_celery %}    "celery[redis]>=5.4",
+{% endif %}]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.6",
+    "mypy>=1.11",
+    "pytest>=8.0",
+]
+
+[tool.ruff]
+line-length = 120
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.mypy]
+python_version = "3.13"
+ignore_missing_imports = true
+plugins = ["pydantic.mypy"]
+files = ["app", "wsgi.py"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

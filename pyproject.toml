@@ -1,0 +1,53 @@
+[project]
+name = "create-flask"
+version = "0.1.0"
+description = "现代 Flask 项目生成器：uv + ruff + pydantic-settings + SQLAlchemy 2.0 + gunicorn，基于 Typer 的 CLI 脚手架。"
+readme = "README.md"
+requires-python = ">=3.13"
+license = { file = "LICENSE" }
+dependencies = [
+    "typer>=0.12",
+    "jinja2>=3.1",
+]
+
+[project.scripts]
+create-flask = "create_flask.cli:run"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.6",
+    "mypy>=1.11",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/create_flask"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"src/create_flask/templates" = "create_flask/templates"
+
+[tool.hatch.build.targets.sdist]
+include = ["src/create_flask", "README.md", "LICENSE"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+extend-exclude = ["src/create_flask/templates"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+# B008：Typer 依赖在参数默认值中调用 Option/Argument，属正常用法
+ignore = ["B008"]
+
+[tool.mypy]
+python_version = "3.13"
+ignore_missing_imports = true
+files = ["src/create_flask"]
+exclude = "src/create_flask/templates/"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
