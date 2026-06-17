@@ -34,6 +34,43 @@ create-flask my-api
 cd my-api && uv sync && cp .env.example .env && uv run flask run
 ```
 
+## 技术栈
+
+create-flask **工具本身**与**生成项目**使用不同技术栈，职责分离：
+
+### 工具本身（create-flask CLI）
+
+| 类别 | 技术 |
+|------|------|
+| 语言 | Python 3.13 |
+| CLI | [Typer](https://typer.tiangolo.com/) |
+| 模板引擎 | [Jinja2](https://jinja.palletsprojects.com/) |
+| 打包 | [hatchling](https://hatch.pypa.io/) |
+| 开发 | uv · pytest · ruff · mypy |
+
+运行时依赖仅 **Typer + Jinja2**；模板渲染、可选模块门控、git 浅克隆均在此层完成。
+
+### 生成项目（`create-flask my-api` 产物）
+
+| 类别 | 技术 |
+|------|------|
+| 运行时 | Python 3.13 · [uv](https://github.com/astral-sh/uv) |
+| Web | 纯 [Flask](https://flask.palletsprojects.com/)（蓝图 + 视图函数） |
+| 校验 / 配置 | [Pydantic](https://docs.pydantic.dev/) · pydantic-settings |
+| 数据 | [SQLAlchemy](https://www.sqlalchemy.org/) 2.0 · Flask-SQLAlchemy · Flask-Migrate |
+| 代码质量 | [ruff](https://docs.astral.sh/ruff/) · [mypy](https://mypy-lang.org/) |
+| 生产 | [gunicorn](https://docs.gunicorn.org/) + supervisor + nginx |
+
+> 不依赖 Flask-RESTful / Flask-Smorest / Marshmallow。
+
+**可选模块**（`--redis` / `--celery` / `--docker`，不计入核心栈）：
+
+| 开关 | 技术 |
+|------|------|
+| `--redis` | 官方 [redis](https://redis.io/docs/latest/develop/clients/redis-py/) 客户端 |
+| `--celery` | [Celery](https://docs.celeryq.dev/)（强制依赖 Redis） |
+| `--docker` | Dockerfile · docker compose |
+
 ## 特性
 
 | | |
