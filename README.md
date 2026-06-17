@@ -65,6 +65,9 @@ pipx install create-flask
 ```bash
 uv tool install git+https://github.com/xiongxianzhu/create-flask.git
 
+# 更新或重装（上游有变更、安装失败或命中旧缓存时）
+uv tool install --reinstall git+https://github.com/xiongxianzhu/create-flask.git
+
 # 或 pip / pipx
 pip install git+https://github.com/xiongxianzhu/create-flask.git
 pipx install git+https://github.com/xiongxianzhu/create-flask.git
