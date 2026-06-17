@@ -29,8 +29,8 @@
 基于 **Typer** 的 CLI 脚手架。生成文件后由你自行 `uv sync`、迁移与启动——工具不代跑任何初始化命令。
 
 ```bash
-uv sync
-uv run create-flask my-api
+uv tool install git+https://github.com/xiongxianzhu/create-flask.git
+create-flask my-api
 cd my-api && uv sync && cp .env.example .env && uv run flask run
 ```
 
@@ -45,20 +45,59 @@ cd my-api && uv sync && cp .env.example .env && uv run flask run
 | **可选模块** | `--redis`（官方 redis 客户端）· `--celery`（强制依赖 Redis）· `--docker` |
 | **自定义模板** | 内置 / 本地目录 / git 仓库，同一套 Jinja 约定与模块门控 |
 
+## 安装
+
+**要求**：Python 3.13+；推荐 [uv](https://github.com/astral-sh/uv)。使用 git 模板时需系统已安装 `git`。
+
+### PyPI（发布后）
+
+```bash
+# 推荐：全局 CLI，任意目录可用
+uv tool install create-flask
+
+# 或 pip
+pip install create-flask
+pipx install create-flask
+```
+
+### 从 GitHub 安装（当前）
+
+```bash
+uv tool install git+https://github.com/xiongxianzhu/create-flask.git
+
+# 或 pip / pipx
+pip install git+https://github.com/xiongxianzhu/create-flask.git
+pipx install git+https://github.com/xiongxianzhu/create-flask.git
+```
+
+### 本地开发（贡献 / 调试）
+
+```bash
+git clone https://github.com/xiongxianzhu/create-flask.git
+cd create-flask
+uv sync
+
+# 仓库内直接运行（无需全局安装）
+uv run create-flask my-api
+```
+
+### 验证
+
+```bash
+create-flask --version
+create-flask --help
+```
+
 ## 快速开始
 
 ```bash
-# 安装（本仓库）
-uv sync
+# 生成项目（已全局安装时）
+create-flask my-api
+create-flask my-api --redis --celery --docker
+create-flask my-api --path ./services --force
 
-# 生成项目
+# 未全局安装、在仓库内开发时
 uv run create-flask my-api
-uv run create-flask my-api --redis --celery --docker
-uv run create-flask my-api --path ./services --force
-
-# 查看帮助
-uv run create-flask --help
-uv run create-flask --version
 ```
 
 生成完成后，进入项目目录按 `README.md` 执行 `uv sync`、数据库迁移与启动。
@@ -88,14 +127,14 @@ create-flask <name> [OPTIONS]
 
 ```bash
 # 内置（默认）
-uv run create-flask my-api
+create-flask my-api
 
 # 本地目录
-uv run create-flask my-api -t ./my-template
+create-flask my-api -t ./my-template
 
 # git 仓库（浅克隆，结束后清理）
-uv run create-flask my-api -t https://github.com/user/flask-template
-uv run create-flask my-api -t git@github.com:user/repo.git \
+create-flask my-api -t https://github.com/user/flask-template
+create-flask my-api -t git@github.com:user/repo.git \
   --template-ref main --template-subdir templates/api
 ```
 
