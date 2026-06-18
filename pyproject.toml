@@ -48,3 +48,6 @@ exclude = "src/create_flask/templates/"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+[tool.uv]
+index-url = "https://mirrors.tencent.com/pypi/simple/"
