@@ -166,7 +166,6 @@ def test_resolve_local_template_missing() -> None:
 
 
 def test_custom_local_template(tmp_path: Path) -> None:
-    # 构造一个遵循约定的最小本地模板
     tpl = tmp_path / "tpl"
     (tpl / "app").mkdir(parents=True)
     (tpl / "README.md").write_text(
@@ -188,10 +187,23 @@ def test_custom_local_template(tmp_path: Path) -> None:
     readme = (target / "README.md").read_text(encoding="utf-8")
     assert "# cool-app" in readme
     assert "pkg=cool_app" in readme
-    # Docker 文件受门控：未启用 --docker 不生成
     assert not (target / "Dockerfile").exists()
-    # use_redis 未启用
     assert "REDIS" not in (target / "app" / "main.py").read_text(encoding="utf-8")
+
+
+def test_path_placeholder_in_filename(tmp_path: Path) -> None:
+    tpl = tmp_path / "tpl"
+    conf_dir = tpl / "deploy" / "supervisor"
+    conf_dir.mkdir(parents=True)
+    conf_path = conf_dir / "{{ project_name }}.conf"
+    conf_path.write_text("[program:{{ project_name }}]\n", encoding="utf-8")
+
+    target = tmp_path / "out"
+    generate_project(ProjectOptions(name="my-api", target_dir=target, template_dir=tpl))
+
+    assert (target / "deploy" / "supervisor" / "my-api.conf").exists()
+    content = (target / "deploy" / "supervisor" / "my-api.conf").read_text(encoding="utf-8")
+    assert "[program:my-api]" in content
 
 
 def test_custom_local_template_skips_git_dir(tmp_path: Path) -> None:

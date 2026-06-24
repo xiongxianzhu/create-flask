@@ -198,10 +198,10 @@ create-flask my-api -t git@github.com:user/repo.git \
 <details>
 <summary><strong>外部模板约定</strong></summary>
 
-- **占位变量**：`{{ project_name }}`、`{{ package_name }}`（`-` → `_`），及 `use_redis` / `use_celery` / `use_docker`
+- **占位变量**：`{{ project_name }}`、`{{ package_name }}`（`-` → `_`），及 `use_redis` / `use_celery` / `use_docker`；可用于**文件内容**与**文件/目录名**
 - **点文件占位名**：`gitignore`、`dockerignore`、`python-version`、`env.example`（生成时自动加点）
 - **模块门控**：`celeryconfig.py`、`app/tasks/` 仅 `--celery`；Docker 三件套仅 `--docker`
-- **supervisor**：`deploy/supervisor/supervisor.conf` → `<name>.conf`
+- **路径示例**：`deploy/supervisor/{{ project_name }}.conf` → `deploy/supervisor/my-api.conf`
 - **其他**：空目录用 `.gitkeep`；非文本文件原样复制；克隆的 `.git/` 不进入产物
 
 git 来源需系统已安装 `git`。`http(s)://`、`git@`、`ssh://`、`git://` 或 `.git` 结尾按 git 处理，其余为本地路径。

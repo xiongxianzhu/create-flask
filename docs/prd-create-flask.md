@@ -97,7 +97,7 @@
 - git 来源应使用系统 `git clone`（浅克隆）拉取到临时目录，生成结束后清理；未安装 git 或克隆失败应给出明确错误。
 - 来源判定：以 `http(s)://`、`git@`、`ssh://`、`git://` 开头或以 `.git` 结尾按 git 处理，其余按本地路径。
 - 克隆产物中的 `.git/` 等 VCS 元数据不得进入生成结果；非文本文件应原样复制、不做模板渲染。
-- 外部模板应遵循与内置一致的约定：Jinja2 占位（`project_name` / `package_name` / `use_redis` / `use_celery` / `use_docker`）、点文件无点占位名、可选模块按约定路径门控、supervisor 配置按项目名重命名、空目录 `.gitkeep` 占位。
+- 外部模板应遵循与内置一致的约定：Jinja2 占位（`project_name` / `package_name` / `use_redis` / `use_celery` / `use_docker`）可用于文件内容与路径、点文件无点占位名、可选模块按约定路径门控、空目录 `.gitkeep` 占位。
 - 来源目录不存在或子目录不存在时应报错并终止。
 
 ## 依赖管理（uv）

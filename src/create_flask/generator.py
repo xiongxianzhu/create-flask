@@ -134,16 +134,30 @@ def _is_included(rel_posix: str, opts: ProjectOptions) -> bool:
     return True
 
 
-def _output_relpath(rel: Path, opts: ProjectOptions) -> Path:
-    rel_posix = rel.as_posix()
-    # supervisor 配置按项目名重命名
-    if rel_posix == "deploy/supervisor/supervisor.conf":
-        return Path("deploy/supervisor") / f"{opts.name}.conf"
-    # 点文件名映射
-    mapped = DOTFILE_MAP.get(rel.name)
+def _render_path_part(part: str, context: dict[str, object]) -> str:
+    """渲染路径中的单个片段（文件名或目录名）。"""
+    if "{{" not in part and "{%" not in part:
+        return part
+    return _render(part, context)
+
+
+def _render_relpath(rel: Path, context: dict[str, object]) -> Path:
+    """将相对路径中各片段的 Jinja 占位符替换为实际值。"""
+    return Path(*(_render_path_part(part, context) for part in rel.parts))
+
+
+def _output_relpath(rel: Path, context: dict[str, object]) -> Path:
+    rendered = _render_relpath(rel, context)
+    for part in rendered.parts:
+        if "{{" in part or "{%" in part:
+            raise GenerationError(f"路径占位符未完全替换：{rendered.as_posix()}")
+
+    # 点文件名映射（模板侧用无点占位名）
+    mapped = DOTFILE_MAP.get(rendered.name)
     if mapped is not None:
-        return rel.with_name(mapped)
-    return rel
+        return rendered.with_name(mapped)
+
+    return rendered
 
 
 def _build_context(opts: ProjectOptions) -> dict[str, object]:
@@ -191,7 +205,7 @@ def generate_project(opts: ProjectOptions) -> GenerationResult:
                 continue
             if not _is_included(rel.as_posix(), opts):
                 continue
-            out_rel = _output_relpath(rel, opts)
+            out_rel = _output_relpath(rel, context)
             out_path = staging / out_rel
             out_path.parent.mkdir(parents=True, exist_ok=True)
             if src.name == ".gitkeep":
