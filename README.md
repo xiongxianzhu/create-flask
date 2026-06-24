@@ -128,6 +128,23 @@ create-flask --version
 create-flask --help
 ```
 
+### 卸载
+
+按安装方式对应卸载全局 CLI（**不会**删除已生成的项目目录）：
+
+```bash
+# uv tool 安装时
+uv tool uninstall create-flask
+
+# pip 安装时
+pip uninstall create-flask
+
+# pipx 安装时
+pipx uninstall create-flask
+```
+
+本地开发（clone 仓库 + `uv sync`）无需卸载命令，删除 clone 目录即可。
+
 ## 快速开始
 
 ```bash
