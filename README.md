@@ -228,6 +228,48 @@ my-api/
 └── pyproject.toml
 ```
 
+## PyPI 镜像源
+
+本仓库与生成项目的 `pyproject.toml` 均默认使用腾讯 PyPI 镜像：
+
+```toml
+[tool.uv]
+index-url = "https://mirrors.tencent.com/pypi/simple/"
+```
+
+若 `uv sync` 仍从其他镜像或官方 PyPI 拉包，常见原因如下。
+
+### 优先级
+
+uv 解析依赖时的镜像来源（高 → 低）：
+
+1. 命令行 `--index-url`
+2. 环境变量 `UV_INDEX_URL`
+3. 项目 `pyproject.toml` 中的 `[tool.uv] index-url`
+4. 官方 PyPI
+
+因此 shell 里若设置了 `UV_INDEX_URL`（例如清华源），会**覆盖**项目内的腾讯源配置。uv 读取的是 `UV_INDEX_URL`，不是 `PIP_INDEX_URL`。
+
+### `uv.lock` 会固定下载地址
+
+`uv lock` 会把当时使用的 registry 和包 URL 写入 `uv.lock`。仅修改 `pyproject.toml` 不会自动换源；需重新锁依赖：
+
+```bash
+# 若希望本项目严格走 pyproject.toml 中的腾讯源，可先取消全局覆盖
+unset UV_INDEX_URL
+
+uv lock
+uv sync
+```
+
+### 推荐做法
+
+| 场景 | 做法 |
+|------|------|
+| 仅本项目用腾讯源 | 不设 `UV_INDEX_URL`，保留 `pyproject.toml` 中的 `index-url` |
+| 所有项目统一镜像 | 在 `~/.zshrc` 等设置 `UV_INDEX_URL`，与项目配置保持一致 |
+| 切换镜像后 | 执行 `uv lock` 再 `uv sync`，并提交更新后的 `uv.lock` |
+
 ## 开发
 
 ```bash
@@ -241,4 +283,8 @@ uv run mypy
 
 <p align="center">
   <sub>MIT · 只生成文件，不代跑 <code>uv sync</code> / 迁移 / 启动</sub>
+</p>
+
+<p align="center">
+  <sub>姊妹项目 → <a href="https://github.com/xiongxianzhu/create-fastapi">create-fastapi</a></sub>
 </p>
