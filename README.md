@@ -225,6 +225,7 @@ my-api/
 ├── tests/
 ├── wsgi.py
 ├── gunicorn.conf.py
+├── Makefile           # 常用开发命令
 └── pyproject.toml
 ```
 

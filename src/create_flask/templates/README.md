@@ -37,6 +37,15 @@ tests/              测试
 ## 本地开发
 
 ```bash
+make install          # uv sync
+make env              # cp .env.example .env
+make db-setup         # flask db init → migrate → upgrade
+make run              # flask run
+```
+
+或手动执行：
+
+```bash
 uv sync
 cp .env.example .env       # 修改 SECRET_KEY、DATABASE_URL 等
 
@@ -46,23 +55,24 @@ uv run flask db upgrade
 uv run flask run
 ```
 
+`make help` 查看全部命令（lint / test / gunicorn{% if use_celery %} / celery{% endif %}{% if use_docker %} / docker-up{% endif %} 等）。
+
 健康检查：`GET http://127.0.0.1:5000/health` 应返回 `{"status": "ok"}`。
 
 ## 代码质量
 
 ```bash
-uv run ruff check .
-uv run ruff format --check .
-uv run mypy
-uv run pytest
+make check            # lint + format-check + mypy + pytest
+# 或分项：make lint | make format | make typecheck | make test
 ```
 {% if use_celery %}
 ## Celery
 
-需本地或远程 Redis 可用，启动 worker：
+需本地或远程 Redis 可用：
 
 ```bash
-uv run celery -A wsgi:celery_app worker -l info
+make celery
+# 或 uv run celery -A wsgi:celery_app worker -l info
 ```
 {% endif %}
 ## 生产部署（gunicorn + supervisor + nginx）
@@ -93,7 +103,8 @@ server {
 ## 容器化部署
 
 ```bash
-docker compose up --build
+make docker-up
+# 或 docker compose up --build
 ```
 
 应用监听容器内 `0.0.0.0:8000`，映射到宿主机 `8000` 端口。

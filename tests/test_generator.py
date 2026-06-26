@@ -49,6 +49,7 @@ def test_base_generation(tmp_path: Path) -> None:
     assert (target / "app" / "__init__.py").exists()
     assert (target / "wsgi.py").exists()
     assert (target / "pyproject.toml").exists()
+    assert (target / "Makefile").exists()
     assert (target / ".env.example").exists()
     assert (target / ".python-version").exists()
     assert (target / ".gitignore").exists()
