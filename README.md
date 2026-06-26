@@ -271,6 +271,17 @@ uv sync
 | 所有项目统一镜像 | 在 `~/.zshrc` 等设置 `UV_INDEX_URL`，与项目配置保持一致 |
 | 切换镜像后 | 执行 `uv lock` 再 `uv sync`，并提交更新后的 `uv.lock` |
 
+## llms.txt · AI 导航
+
+> 仓库根目录的 [`llms.txt`](llms.txt) 遵循 [llms.txt 规范](https://llmstxt.org/)，为 LLM / AI 助手提供**精简索引**——指向 README、PRD、核心源码与模板，避免通读全库。
+
+| 文件 | 面向 |
+|------|------|
+| [`llms.txt`](llms.txt) | LLM 快速定位文档与关键路径 |
+| [`AGENT.md`](AGENT.md) | Agent 协作约定、生成边界与开发命令 |
+
+在 Cursor / Claude 等环境中，可将 `llms.txt` 作为上下文入口；`Optional` 小节内的链接可在上下文紧张时跳过。
+
 ## 开发
 
 ```bash

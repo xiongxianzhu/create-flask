@@ -1,0 +1,31 @@
+# create-flask
+
+> 基于 Typer + Jinja2 的现代 Flask 项目生成器 CLI。一条命令 `create-flask <name>` 渲染模板并落盘生产可用的 Flask 骨架（纯 Flask + Pydantic + SQLAlchemy 2.0 + uv + gunicorn）。工具只生成文件，不代跑 `uv sync`、迁移或启动服务。
+
+本仓库维护**脚手架工具本身**；生成产物的结构与约定以 `src/create_flask/templates/` 为准。姊妹项目：[create-fastapi](https://github.com/xiongxianzhu/create-fastapi)。
+
+## 文档
+
+- [README](README.md): 项目介绍、安装卸载、技术栈、CLI 参数、自定义模板、PyPI 镜像源
+- [AGENT](AGENT.md): 面向 AI Agent 的仓库地图、生成约定、开发命令与边界
+- [PRD](docs/prd-create-flask.md): 产品需求与验收标准（简化版）
+
+## 核心源码
+
+- [CLI 入口](src/create_flask/cli.py): Typer 命令 `create-flask <name>`，参数校验与结果汇总
+- [生成器](src/create_flask/generator.py): Jinja 渲染、路径占位符、可选模块门控、git 模板克隆
+- [内置模板目录](src/create_flask/templates/): 生成项目的全部文件（改生成结果只改此处）
+- [生成项目 README 模板](src/create_flask/templates/README.md): 生成后项目内的使用说明
+- [生成项目 Makefile 模板](src/create_flask/templates/Makefile): 常用开发命令封装
+
+## 配置与测试
+
+- [pyproject.toml](pyproject.toml): 工具依赖、hatchling 打包、ruff/mypy/pytest、腾讯 PyPI 镜像
+- [测试套件](tests/test_generator.py): 生成器单测（项目名、可选模块、模板来源、路径占位符）
+
+## Optional
+
+- [生成项目 pyproject 模板](src/create_flask/templates/pyproject.toml): 生成项目的依赖与 ruff/mypy 配置
+- [Git 提交规范](.cursor/rules/git-commit-message.mdc): Conventional Commits，简体中文
+- [Git 工作流程](.cursor/rules/git-workflow.mdc): 分支命名与提交类型
+- [LICENSE](LICENSE): MIT
