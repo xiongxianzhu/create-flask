@@ -273,6 +273,12 @@ uv sync
 
 ## llms.txt · AI 导航
 
+<p align="center">
+  <a href="llms.txt"><img src="https://img.shields.io/badge/llms.txt-LLM_导航-009688?style=flat-square&logo=readthedocs&logoColor=white" alt="llms.txt"/></a>
+  <a href="AGENT.md"><img src="https://img.shields.io/badge/AGENT.md-AI_指南-4051B5?style=flat-square" alt="AGENT.md"/></a>
+  <a href="https://llmstxt.org/"><img src="https://img.shields.io/badge/spec-llmstxt.org-4A4A4A?style=flat-square" alt="llms.txt spec"/></a>
+</p>
+
 > 仓库根目录的 [`llms.txt`](llms.txt) 遵循 [llms.txt 规范](https://llmstxt.org/)，为 LLM / AI 助手提供**精简索引**——指向 README、PRD、核心源码与模板，避免通读全库。
 
 | 文件 | 面向 |
